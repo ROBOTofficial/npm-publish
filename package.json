@@ -1,17 +1,17 @@
 {
   "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
+  "description": "Npm publish action",
   "version": "0.0.0",
   "author": "",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "homepage": "https://github.com/ROBOTofficial/npm-publish",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/ROBOTofficial/npm-publish.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/ROBOTofficial/npm-publish/issues"
   },
   "keywords": [
     "actions"
