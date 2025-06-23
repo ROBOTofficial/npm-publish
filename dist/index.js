@@ -27244,21 +27244,7 @@ function requireCore () {
 	return core;
 }
 
-var coreExports = requireCore();
-
-/**
- * Waits for a number of milliseconds.
- *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
- */
-async function wait(milliseconds) {
-    return new Promise((resolve) => {
-        if (isNaN(milliseconds))
-            throw new Error("milliseconds is not a number");
-        setTimeout(() => resolve("done!"), milliseconds);
-    });
-}
+requireCore();
 
 /**
  * The main function for the action.
@@ -27266,22 +27252,6 @@ async function wait(milliseconds) {
  * @returns Resolves when the action is complete.
  */
 async function run() {
-    try {
-        const ms = coreExports.getInput("milliseconds");
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        coreExports.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        coreExports.debug(new Date().toTimeString());
-        await wait(parseInt(ms, 10));
-        coreExports.debug(new Date().toTimeString());
-        // Set outputs for other workflow steps to use
-        coreExports.setOutput("time", new Date().toTimeString());
-    }
-    catch (error) {
-        // Fail the workflow run if an error occurs
-        if (error instanceof Error)
-            coreExports.setFailed(error.message);
-    }
 }
 
 run();
