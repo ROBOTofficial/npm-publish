@@ -4,8 +4,8 @@ import { getPackageJson, isPublishedVersion } from "./package.js";
 
 export async function run(): Promise<void> {
   try {
-    const npmToken = core.getInput("npm_token");
-    const publishedCheck = core.getBooleanInput("published_check");
+    const npmToken = core.getInput("npm-token");
+    const publishedCheck = core.getBooleanInput("published-check");
     const installCommand = core.getInput("install");
     const runCommand = core.getInput("runCommand");
     const publishCommand = core.getInput("publish");

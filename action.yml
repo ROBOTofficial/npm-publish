@@ -7,10 +7,10 @@ branding:
   color: red
 
 inputs:
-  npm_token:
+  npm-token:
     description: npm publish token
     required: true
-  published_check:
+  published-check:
     description: check if this version has been published
     required: false
     default: true

@@ -27272,8 +27272,8 @@ async function isPublishedVersion(name, version) {
 
 async function run() {
     try {
-        const npmToken = coreExports.getInput("npm_token");
-        const publishedCheck = coreExports.getBooleanInput("published_check");
+        const npmToken = coreExports.getInput("npm-token");
+        const publishedCheck = coreExports.getBooleanInput("published-check");
         const installCommand = coreExports.getInput("install");
         const runCommand = coreExports.getInput("runCommand");
         const publishCommand = coreExports.getInput("publish");
