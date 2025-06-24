@@ -1,7 +1,7 @@
 {
   "name": "npm-publisher",
   "description": "Npm publish action",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "",
   "type": "module",
   "private": true,
