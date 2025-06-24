@@ -3,8 +3,8 @@ description: Npm publish action
 author: ROBOTofficial
 
 branding:
-  icon: heart
-  color: red
+  icon: upload-cloud
+  color: green
 
 inputs:
   npm-token:
