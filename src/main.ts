@@ -17,7 +17,7 @@ export async function run(): Promise<void> {
     if (publishedCheck) {
       const { name, version } = await getPackageJson();
       if (await isPublishedVersion(name, version)) {
-        return core.info(
+        return core.notice(
           "The action has been terminated because the version has already been published."
         );
       }
@@ -30,6 +30,8 @@ export async function run(): Promise<void> {
     }
 
     await exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
+
+    return core.notice("published!");
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }

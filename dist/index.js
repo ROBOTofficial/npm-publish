@@ -27283,7 +27283,7 @@ async function run() {
         if (publishedCheck) {
             const { name, version } = await getPackageJson();
             if (await isPublishedVersion(name, version)) {
-                return coreExports.info("The action has been terminated because the version has already been published.");
+                return coreExports.notice("The action has been terminated because the version has already been published.");
             }
         }
         await execExports.exec(installCommand);
@@ -27291,6 +27291,7 @@ async function run() {
             await execExports.exec(runCommand);
         }
         await execExports.exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
+        return coreExports.notice("published!");
     }
     catch (error) {
         if (error instanceof Error)
