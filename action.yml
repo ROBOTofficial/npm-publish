@@ -1,16 +1,31 @@
 name: npm-publisher
 description: Npm publish action
-author: ROBOT
+author: ROBOTofficial
 
 branding:
   icon: heart
   color: red
 
 inputs:
-  milliseconds:
-    description: Your input description here
+  npm_token:
+    description: npm publish token
     required: true
-    default: "1000"
+  published_check:
+    description: check if this version has been published
+    required: false
+    default: true
+  run:
+    description: run command before publish
+    required: false
+  install_command:
+    description: "install command (default: npm install)"
+    required: false
+    default: npm install
+  publish_command:
+    description:
+      "publish command (default: npm publish --provenance --access public)"
+    required: false
+    default: npm publish --provenance --access public
 
 outputs:
   time:
