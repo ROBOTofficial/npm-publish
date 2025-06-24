@@ -1,7 +1,7 @@
 import require$$0 from 'os';
 import require$$0$1 from 'crypto';
-import require$$1 from 'fs';
-import require$$1$5 from 'path';
+import require$$1, { existsSync, readFileSync } from 'fs';
+import require$$1$5, { join } from 'path';
 import require$$2 from 'http';
 import require$$3 from 'https';
 import require$$0$4 from 'net';
@@ -27244,14 +27244,58 @@ function requireCore () {
 	return core;
 }
 
-requireCore();
+var coreExports = requireCore();
 
-/**
- * The main function for the action.
- *
- * @returns Resolves when the action is complete.
- */
+var execExports = requireExec();
+
+async function getPackageJson() {
+    const packagePath = join(process.cwd(), "package.json");
+    if (!existsSync(packagePath))
+        throw new Error("package.json could not be found in your project's root.");
+    const { name, version } = JSON.parse(readFileSync(packagePath, "utf-8"));
+    if (!name || !version)
+        throw new Error("name or version not found in package.json");
+    return {
+        name: name,
+        version: version
+    };
+}
+async function isPublishedVersion(name, version) {
+    try {
+        const response = await fetch(`https://registry.npmjs.org/${name}/${version}`);
+        return response.ok;
+    }
+    catch {
+        return false;
+    }
+}
+
 async function run() {
+    try {
+        const npmToken = coreExports.getInput("npm_token");
+        const publishedCheck = coreExports.getBooleanInput("published_check");
+        const installCommand = coreExports.getInput("install");
+        const runCommand = coreExports.getInput("runCommand");
+        const publishCommand = coreExports.getInput("publish");
+        if (!npmToken) {
+            return coreExports.setFailed("npm_token input not found");
+        }
+        if (publishedCheck) {
+            const { name, version } = await getPackageJson();
+            if (await isPublishedVersion(name, version)) {
+                return coreExports.info("The action has been terminated because the version has already been published.");
+            }
+        }
+        await execExports.exec(installCommand);
+        if (runCommand) {
+            await execExports.exec(runCommand);
+        }
+        await execExports.exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
+    }
+    catch (error) {
+        if (error instanceof Error)
+            coreExports.setFailed(error.message);
+    }
 }
 
 run();

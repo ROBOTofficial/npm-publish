@@ -1,14 +1,36 @@
 import * as core from "@actions/core";
+import { exec } from "@actions/exec";
+import { getPackageJson, isPublishedVersion } from "./package.js";
 
-/**
- * The main function for the action.
- *
- * @returns Resolves when the action is complete.
- */
 export async function run(): Promise<void> {
   try {
+    const npmToken = core.getInput("npm_token");
+    const publishedCheck = core.getBooleanInput("published_check");
+    const installCommand = core.getInput("install");
+    const runCommand = core.getInput("runCommand");
+    const publishCommand = core.getInput("publish");
+
+    if (!npmToken) {
+      return core.setFailed("npm_token input not found");
+    }
+
+    if (publishedCheck) {
+      const { name, version } = await getPackageJson();
+      if (await isPublishedVersion(name, version)) {
+        return core.info(
+          "The action has been terminated because the version has already been published."
+        );
+      }
+    }
+
+    await exec(installCommand);
+
+    if (runCommand) {
+      await exec(runCommand);
+    }
+
+    await exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
   } catch (error) {
-    // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message);
   }
 }
