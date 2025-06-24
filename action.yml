@@ -17,11 +17,11 @@ inputs:
   run:
     description: run command before publish
     required: false
-  install_command:
+  install:
     description: "install command (default: npm install)"
     required: false
     default: npm install
-  publish_command:
+  publish:
     description:
       "publish command (default: npm publish --provenance --access public)"
     required: false
