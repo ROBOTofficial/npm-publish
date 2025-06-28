@@ -31,7 +31,11 @@ export async function run(): Promise<void> {
       await exec(runCommand);
     }
 
-    await exec(publishCommand);
+    await exec(publishCommand, [], {
+      env: {
+        NODE_AUTH_TOKEN: npmToken
+      }
+    });
 
     return core.notice("published!");
   } catch (error) {

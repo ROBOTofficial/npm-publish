@@ -27291,7 +27291,11 @@ async function run() {
         if (runCommand) {
             await execExports.exec(runCommand);
         }
-        await execExports.exec(publishCommand);
+        await execExports.exec(publishCommand, [], {
+            env: {
+                NODE_AUTH_TOKEN: npmToken
+            }
+        });
         return coreExports.notice("published!");
     }
     catch (error) {
