@@ -1,5 +1,15 @@
 # npm-publisher
 
+## 1.0.2
+
+### Patch Changes
+
+- a34a1ee: fix: streamline token usage in publish command execution
+
+## 1.0.1
+
+**test change**
+
 ## 1.0.0
 
 ### Major Changes
