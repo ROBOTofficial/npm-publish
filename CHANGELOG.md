@@ -1,5 +1,14 @@
 # npm-publisher
 
+## 1.0.3
+
+### Patch Changes
+
+- df7137d: fix: ensure NODE_AUTH_TOKEN is set in the environment for publish
+  command
+- 5b6ac74: chore: downgrade @github/local-action from 3.2.1 to 2.2.1 in
+  devDependencies
+
 ## 1.0.2
 
 ### Patch Changes
