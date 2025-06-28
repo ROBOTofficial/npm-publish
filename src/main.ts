@@ -23,13 +23,15 @@ export async function run(): Promise<void> {
       }
     }
 
+    await exec(`NODE_AUTH_TOKEN="${npmToken}"`);
+
     await exec(installCommand);
 
     if (runCommand) {
       await exec(runCommand);
     }
 
-    await exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
+    await exec(publishCommand);
 
     return core.notice("published!");
   } catch (error) {

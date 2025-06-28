@@ -27286,11 +27286,12 @@ async function run() {
                 return coreExports.notice("The action has been terminated because the version has already been published.");
             }
         }
+        await execExports.exec(`NODE_AUTH_TOKEN="${npmToken}"`);
         await execExports.exec(installCommand);
         if (runCommand) {
             await execExports.exec(runCommand);
         }
-        await execExports.exec(publishCommand, [`NODE_AUTH_TOKEN="${npmToken}"`]);
+        await execExports.exec(publishCommand);
         return coreExports.notice("published!");
     }
     catch (error) {
