@@ -1,5 +1,12 @@
 # npm-publisher
 
+## 1.1.0
+
+### Minor Changes
+
+- adfbe47: fix: set NODE_AUTH_TOKEN directly in the environment for publish
+  command
+
 ## 1.0.3
 
 ### Patch Changes
