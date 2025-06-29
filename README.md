@@ -12,10 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-      - uses: ROBOTofficial/npm-publish@1
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: ROBOTofficial/npm-publish@v1
         with:
           npm-token: ${{ secrets.NPM_TOKEN }}
 ```
