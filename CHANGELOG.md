@@ -1,5 +1,11 @@
 # npm-publisher
 
+## 1.1.2
+
+### Patch Changes
+
+- ca5fdc0: fix: improve README formatting for NPM publish action
+
 ## 1.1.0
 
 ### Minor Changes
