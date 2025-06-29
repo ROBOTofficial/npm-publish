@@ -9,15 +9,26 @@ on:
 
 jobs:
   publish:
+    name: Release (NPM)
+
+    permissions:
+      contents: read
+      id-token: write
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: "https://registry.npmjs.org"
 
-      - uses: ROBOTofficial/npm-publish@v1
+      - name: Publish
+        uses: ROBOTofficial/npm-publish@v1
         with:
           npm-token: ${{ secrets.NPM_TOKEN }}
 ```
